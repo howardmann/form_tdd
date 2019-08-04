@@ -70,4 +70,22 @@ describe('Form', () => {
     expect(errorMsg).toMatch(/password must be min 7 characters/)
     expect(backgroundColor).toBe('red')
   })
+
+  it('should display multiple validation errors in a list', async () => {
+    await expect(page).toFillForm('form[name="myForm"', {
+      email: 'felixemail.com',
+      password: '12345'
+    })
+    await page.keyboard.press('Enter')
+    await page.screenshot({
+      path: __dirname + '/../screenshots/validateMultiple.png'
+    })
+
+    let errorMsg = await page.$eval('#flash-error', el => el.innerText)
+    let backgroundColor = await page.$eval('#flash-error', el => el.style.backgroundColor)
+    expect(errorMsg).toMatch(/password must be min 7 characters/)
+    expect(errorMsg).toMatch(/company name required/)
+    expect(errorMsg).toMatch(/felixemail.com is not a valid email/)
+    expect(backgroundColor).toBe('red')
+  })
 })

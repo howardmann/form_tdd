@@ -17,23 +17,33 @@
     let password = e.target.password.value
     
     let validEmail = validateEmail(email) 
-
+    let errorList = []
     if (!company) {
-      $flashError.innerText = 'company name required'
-      return
+      let msg = 'company name required'
+      errorList.push(msg)
     }
 
     if(!validEmail) {
-      $flashError.innerText = `${email} is not a valid email`
-      return
+      let msg = `${email} is not a valid email`
+      errorList.push(msg)
     }
 
     if(password.length < 7) {
-      $flashError.innerText = `password must be min 7 characters`
-      return
+      let msg = `password must be min 7 characters`
+      errorList.push(msg)
     }
 
-    $flashSuccess.innerText = `Success: ${company}` 
+    if (errorList.length > 0) {
+      let liArr = errorList.map(el => `<li>${el}</li>`)
+      let HTML = `
+      <ul>
+        ${liArr.join('')}
+      </ul>
+      `
+      $flashError.innerHTML = HTML
+      return
+    }
+    $flashSuccess.innerText = `Success: ${company}`
   })
 
   function validateEmail(email) {
