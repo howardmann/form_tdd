@@ -8,7 +8,7 @@ describe('Form', () => {
   })
 
   it('should display success message on valid form submit', async () => {
-    await expect(page).toFillForm('form[name="myForm"', {
+    await expect(page).toFillForm('form[name="myForm"]', {
       company: 'Felix Pty Ltd',
       email: 'felixmann@email.com',
       password: '12345678910'
@@ -23,7 +23,7 @@ describe('Form', () => {
   })
   
   it('should require company name', async () => {
-    await expect(page).toFillForm('form[name="myForm"', {
+    await expect(page).toFillForm('form[name="myForm"]', {
       email: 'felix@email.com',
       password: '12345678910'
     })
@@ -37,7 +37,7 @@ describe('Form', () => {
   })
 
   it('should validate email', async () => {
-    await expect(page).toFillForm('form[name="myForm"', {
+    await expect(page).toFillForm('form[name="myForm"]', {
       company: '42 PTY LTD',
       email: 'felixemail.com',
       password: '12345678910'
@@ -53,9 +53,8 @@ describe('Form', () => {
     expect(backgroundColor).toBe('red')
   })
 
-
   it('should check password length min 7 characters', async () => {
-    await expect(page).toFillForm('form[name="myForm"', {
+    await expect(page).toFillForm('form[name="myForm"]', {
       company: '42 PTY LTD',
       email: 'felix@email.com',
       password: '12345'
@@ -72,7 +71,7 @@ describe('Form', () => {
   })
 
   it('should display multiple validation errors in a list', async () => {
-    await expect(page).toFillForm('form[name="myForm"', {
+    await expect(page).toFillForm('form[name="myForm"]', {
       email: 'felixemail.com',
       password: '12345'
     })
