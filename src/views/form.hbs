@@ -28,6 +28,11 @@
       return
     }
 
+    if(password.length < 7) {
+      $flashError.innerText = `password must be min 7 characters`
+      return
+    }
+
     $flashSuccess.innerText = `Success: ${company}` 
   })
 
