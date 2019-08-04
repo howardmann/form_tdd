@@ -69,7 +69,5 @@ describe('Form', () => {
     let backgroundColor = await page.$eval('#flash-error', el => el.style.backgroundColor)
     expect(errorMsg).toMatch(/password must be min 7 characters/)
     expect(backgroundColor).toBe('red')
-
   })
-
 })
