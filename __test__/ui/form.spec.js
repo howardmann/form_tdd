@@ -36,6 +36,24 @@ describe('Form', () => {
     expect(backgroundColor).toBe('red')
   })
 
+  it('should validate email', async () => {
+    await expect(page).toFillForm('form[name="myForm"', {
+      company: '42 PTY LTD',
+      email: 'felixemail.com',
+      password: '12345678910'
+    })
+    await page.keyboard.press('Enter')
+    await page.screenshot({
+      path: __dirname + '/../screenshots/validateEmail.png'
+    })
+
+    let errorMsg = await page.$eval('#flash-error', el => el.innerText)
+    let backgroundColor = await page.$eval('#flash-error', el => el.style.backgroundColor)
+    expect(errorMsg).toMatch(/felixemail.com is not a valid email/)
+    expect(backgroundColor).toBe('red')
+  })
+
+
   xit('should check password length', async () => {
   })
 
