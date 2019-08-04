@@ -1,0 +1,17 @@
+<form name="myForm">
+  <input type="text" name="company">
+  <input type="text" name="email">
+  <input type="password" name="password">
+  <input type="submit">
+</form>
+
+<script>
+  let $flashSuccess = document.querySelector('#flash-success')
+  let $form = document.querySelector('form[name="myForm"]')
+  $form.addEventListener('submit', (e)=> {
+    e.preventDefault()
+    let company = e.target.company.value
+    $flashSuccess.innerText = `Success: ${company}` 
+  })
+
+</script>
