@@ -1,8 +1,9 @@
 let express = require('express')
 let bodyParser = require('body-parser') // handle req.body
 let exphbs = require('express-handlebars')
-// let session = require('express-session')
-// let flash = require('connect-flash')
+let session = require('express-session')
+let flash = require('connect-flash')
+let path = require('path')
 const PORT = process.env.PORT || 3000
 
 let app = express()
@@ -15,20 +16,24 @@ app.use(bodyParser.json())
 
 // view engine setup
 app.engine('.hbs', exphbs({
-  extname: '.hbs'
+  extname: '.hbs',
+  partialsDir: __dirname + '/components/'
 }))
 app.set('views', __dirname + '/views')
 app.set('view engine', '.hbs')
 
+// Serve static files from public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 // session and flash views
-// app.use(session({
-//   secret: 'ilikecats',
-//   cookie: {},
-//   resave: false,
-//   saveUninitialized: true
-// }));
-// app.use(flash())
-// app.use(require('./middlewares/flashMessageInViews'))
+app.use(session({
+  secret: 'ilikecats',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(flash())
+app.use(require('./middlewares/flashMessageInViews'))
 
 
 // Require routes
