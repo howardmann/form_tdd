@@ -5,7 +5,7 @@ module.exports = function(){
   let $flashSuccess = document.querySelector('#flash-success')
   let $flashError = document.querySelector('#flash-error')
   console.log('woohoo');
-  
+
   $form.addEventListener('submit', (e) => {
     e.preventDefault()
     let company = e.target.company.value || null
@@ -27,6 +27,7 @@ module.exports = function(){
       $flashError.innerHTML = HTML
       return
     }
+    $flashError.innerHTML = ""
     $flashSuccess.innerText = `Success: ${company}`
   })
 }
