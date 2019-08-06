@@ -1,11 +1,22 @@
-const path = require('path');
+// const path = require('path');
+
+// module.exports = {
+//   // Define entry point
+//   entry: './src/components/app.js',
+//   // Define output point
+//   output: {
+//     path: path.resolve(__dirname + '/src/public'),
+//     filename: 'js/bundle.js'
+//   }
+// };
 
 module.exports = {
-  // Define entry point
-  entry: './src/components/app.js',
-  // Define output point
+  entry: {
+    form: './src/components/form/index.js',
+    counter: './src/components/counter/index.js'
+  },
   output: {
-    path: path.resolve(__dirname + '/src/public'),
-    filename: 'js/bundle.js'
+    filename: '[name].js',
+    path: __dirname + '/src/public/js'
   }
 };

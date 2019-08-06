@@ -5,9 +5,9 @@ router.get('/', (req, res, next) => {
   res.render('form')
 })
 
-// router.post('/signup', (req, res, next) => {
-//   let payload = req.body
+router.get('/counter', (req, res, next) => {
+  res.render('counter')
+})
 
-// })
 
 module.exports = router
