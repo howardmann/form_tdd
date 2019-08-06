@@ -5,6 +5,10 @@ let validateForm = (payload) => {
     company: {
       presence: {
         message: 'company name required'
+      },
+      length: {
+        minimum: 1,
+        message: 'company name required'
       }
     },
     email: {

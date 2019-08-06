@@ -1,9 +1,9 @@
-describe('Form:UI', () => {
+describe('FormServer:UI', () => {
   beforeEach(async () => {
-    await page.goto('http://localhost:4444')
+    await page.goto('http://localhost:4444/form-server')
   })
 
-  it('should have "Form TDD" on the page', async () => {
+  it('should have "Form Server TDD" on the page', async () => {
     await expect(page).toMatch('Form TDD')
   })
 
@@ -14,22 +14,26 @@ describe('Form:UI', () => {
       password: '12345678910'
     })
     await page.keyboard.press('Enter')
-    await page.screenshot({path: __dirname + '/../screenshots/form/success.png'})
+    await page.screenshot({
+      path: __dirname + '/../screenshots/form-server/success.png'
+    })
 
     let successMsg = await page.$eval('#flash-success', el => el.innerText)
-    let backgroundColor = await page.$eval('#flash-success', el => el.style.backgroundColor)    
+    let backgroundColor = await page.$eval('#flash-success', el => el.style.backgroundColor)
     expect(successMsg).toBe('Success: Felix Pty Ltd')
     expect(backgroundColor).toBe('green')
   })
-  
+
   it('should require company name', async () => {
     await expect(page).toFillForm('form[name="myForm"]', {
       email: 'felix@email.com',
       password: '12345678910'
     })
     await page.keyboard.press('Enter')
-    await page.screenshot({path: __dirname + '/../screenshots/form/validateCompany.png'})
-    
+    await page.screenshot({
+      path: __dirname + '/../screenshots/form-server/validateCompany.png'
+    })
+
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
     let backgroundColor = await page.$eval('#flash-error', el => el.style.backgroundColor)
     expect(errorMsg).toMatch(/company name required/)
@@ -44,7 +48,7 @@ describe('Form:UI', () => {
     })
     await page.keyboard.press('Enter')
     await page.screenshot({
-      path: __dirname + '/../screenshots/form/validateEmail.png'
+      path: __dirname + '/../screenshots/form-server/validateEmail.png'
     })
 
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
@@ -61,7 +65,7 @@ describe('Form:UI', () => {
     })
     await page.keyboard.press('Enter')
     await page.screenshot({
-      path: __dirname + '/../screenshots/form/validatePassword.png'
+      path: __dirname + '/../screenshots/form-server/validatePassword.png'
     })
 
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
@@ -77,7 +81,7 @@ describe('Form:UI', () => {
     })
     await page.keyboard.press('Enter')
     await page.screenshot({
-      path: __dirname + '/../screenshots/form/validateMultiple.png'
+      path: __dirname + '/../screenshots/form-server/validateMultiple.png'
     })
 
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
@@ -108,7 +112,7 @@ describe('Form:UI', () => {
     await page.keyboard.press('Enter')
 
     await page.screenshot({
-      path: __dirname + '/../screenshots/form/validateSuccessAfterError.png'
+      path: __dirname + '/../screenshots/form-server/validateSuccessAfterError.png'
     })
 
     let successMsg = await page.$eval('#flash-success', el => el.innerText)
@@ -117,7 +121,7 @@ describe('Form:UI', () => {
     expect(successBackgroundColor).toBe('green')
 
     let newErrorMsg = await page.$eval('#flash-error', el => el.innerText)
-    expect(newErrorMsg).toBe("")    
+    expect(newErrorMsg).toBe("")
   })
 
 })

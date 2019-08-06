@@ -1,8 +1,28 @@
 let express = require('express')
 let router = express.Router()
+let validateForm = require('../validation')
 
 router.get('/', (req, res, next) => {
   res.render('form')
+})
+
+router.get('/form-server', (req, res, next) => {
+  res.render('form-server')
+})
+
+router.post('/form-server', (req, res, next) => {
+  let {company, email, password} = req.body
+  console.log(req.body);
+  let errorList = validateForm({company, email, password})
+  console.log(errorList);
+  if(errorList.length > 0) {
+    req.flash('validationFailure', errorList)
+  } else {
+    let messageSuccess = `Success: ${company}`
+    req.flash('messageSuccess', messageSuccess)
+  }
+
+  res.redirect('form-server')
 })
 
 router.get('/counter', (req, res, next) => {
