@@ -1,4 +1,4 @@
-xdescribe('Form', () => {
+describe('Form:UI', () => {
   beforeEach(async () => {
     await page.goto('http://localhost:4444')
   })
@@ -14,7 +14,7 @@ xdescribe('Form', () => {
       password: '12345678910'
     })
     await page.keyboard.press('Enter')
-    await page.screenshot({path: __dirname + '/../screenshots/success.png'})
+    await page.screenshot({path: __dirname + '/../screenshots/form/success.png'})
 
     let successMsg = await page.$eval('#flash-success', el => el.innerText)
     let backgroundColor = await page.$eval('#flash-success', el => el.style.backgroundColor)    
@@ -28,7 +28,7 @@ xdescribe('Form', () => {
       password: '12345678910'
     })
     await page.keyboard.press('Enter')
-    await page.screenshot({path: __dirname + '/../screenshots/validateCompany.png'})
+    await page.screenshot({path: __dirname + '/../screenshots/form/validateCompany.png'})
     
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
     let backgroundColor = await page.$eval('#flash-error', el => el.style.backgroundColor)
@@ -44,7 +44,7 @@ xdescribe('Form', () => {
     })
     await page.keyboard.press('Enter')
     await page.screenshot({
-      path: __dirname + '/../screenshots/validateEmail.png'
+      path: __dirname + '/../screenshots/form/validateEmail.png'
     })
 
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
@@ -61,7 +61,7 @@ xdescribe('Form', () => {
     })
     await page.keyboard.press('Enter')
     await page.screenshot({
-      path: __dirname + '/../screenshots/validatePassword.png'
+      path: __dirname + '/../screenshots/form/validatePassword.png'
     })
 
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
@@ -77,7 +77,7 @@ xdescribe('Form', () => {
     })
     await page.keyboard.press('Enter')
     await page.screenshot({
-      path: __dirname + '/../screenshots/validateMultiple.png'
+      path: __dirname + '/../screenshots/form/validateMultiple.png'
     })
 
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
@@ -107,7 +107,7 @@ xdescribe('Form', () => {
     await page.keyboard.press('Enter')
 
     await page.screenshot({
-      path: __dirname + '/../screenshots/validateSuccessAfterError.png'
+      path: __dirname + '/../screenshots/form/validateSuccessAfterError.png'
     })
 
     let successMsg = await page.$eval('#flash-success', el => el.innerText)

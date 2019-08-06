@@ -1,5 +1,6 @@
+let counter = require('./counter.js')
+
 let $ = (el) => document.querySelector(el)
-let $$ = (el) => document.querySelectorAll(el)
 
 let $counter = $('#counter')
 let $reset = $('#reset')
@@ -13,14 +14,14 @@ $reset.addEventListener('click', () => {
 $increment.addEventListener('click', () => {
   let initial = $counter.innerText
   let number = initial === 'Results' ? 0 : Number(initial)
-  let newNumber = number + 1
+  let newNumber = counter(number, {type: 'INCREMENT'})
   $counter.innerText = newNumber
 })
 
 $decrement.addEventListener('click', () => {
   let initial = $counter.innerText
   let number = initial === 'Results' ? 0 : Number(initial)
-  let newNumber = number === 0 ? 0 : number - 1
+  let newNumber = counter(number, {type: 'DECREMENT'})
   
   $counter.innerText = newNumber
 })
