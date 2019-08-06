@@ -12,9 +12,7 @@ router.get('/form-server', (req, res, next) => {
 
 router.post('/form-server', (req, res, next) => {
   let {company, email, password} = req.body
-  console.log(req.body);
   let errorList = validateForm({company, email, password})
-  console.log(errorList);
   if(errorList.length > 0) {
     req.flash('validationFailure', errorList)
   } else {
@@ -29,5 +27,8 @@ router.get('/counter', (req, res, next) => {
   res.render('counter')
 })
 
+router.get('/omdb', (req, res, next) => {
+  res.render('omdb')
+})
 
 module.exports = router

@@ -13,7 +13,8 @@
 module.exports = {
   entry: {
     form: './src/components/form/index.js',
-    counter: './src/components/counter/index.js'
+    counter: './src/components/counter/index.js',
+    omdb: './src/components/omdb/index.js'
   },
   output: {
     filename: '[name].js',
