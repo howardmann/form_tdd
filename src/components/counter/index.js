@@ -6,22 +6,29 @@ let $counter = $('#counter')
 let $reset = $('#reset')
 let $increment = $('#increment')
 let $decrement = $('#decrement')
+let $double = $('#double')
+
+let dispatch = (event) => {
+  let initial = $counter.innerText
+  let number = initial === 'Results' ? 0 : Number(initial)
+  let newNumber = counter(number, {
+    type: event.toUpperCase()
+  })
+  $counter.innerText = newNumber
+}
 
 $reset.addEventListener('click', () => {
-  $counter.innerText = 0
+  dispatch('reset')
 })
 
 $increment.addEventListener('click', () => {
-  let initial = $counter.innerText
-  let number = initial === 'Results' ? 0 : Number(initial)
-  let newNumber = counter(number, {type: 'INCREMENT'})
-  $counter.innerText = newNumber
+  dispatch('increment')
 })
 
 $decrement.addEventListener('click', () => {
-  let initial = $counter.innerText
-  let number = initial === 'Results' ? 0 : Number(initial)
-  let newNumber = counter(number, {type: 'DECREMENT'})
-  
-  $counter.innerText = newNumber
+  dispatch('decrement')
+})
+
+$double.addEventListener('click', () => {
+  dispatch('DOUBLE')
 })

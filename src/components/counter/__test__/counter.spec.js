@@ -31,5 +31,20 @@ describe('Counter', () => {
     expect(state1).toBe(1)
   })
 
+  it('should double', () => {
+    let initial = 5
+    let state1 = counter(initial, {
+      type: 'DOUBLE'
+    })
+    expect(state1).toBe(10)
+  })
+
+  it('should reset to 0', () => {
+    let initial = 5
+    let state1 = counter(initial, {
+      type: 'RESET'
+    })
+    expect(state1).toBe(0)
+  })
 
 })

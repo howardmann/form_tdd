@@ -55,4 +55,19 @@ describe('Counter:UI', () => {
     expect(counter4).toBe('2')
 
   })
+
+  it('should double the counter', async () => {
+    await page.click('#double')
+    let counter = await page.$eval('#counter', el => el.innerText)
+    expect(counter).toBe('0')
+
+    await page.click('#increment')
+    await page.click('#increment')
+    let counter1 = await page.$eval('#counter', el => el.innerText)
+    expect(counter1).toBe('2')
+
+    await page.click('#double')
+    let counter2 = await page.$eval('#counter', el => el.innerText)
+    expect(counter2).toBe('4')
+  })
 })
