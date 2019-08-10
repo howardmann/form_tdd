@@ -4,7 +4,7 @@ let validURL = require('../fixtures/shorten/validURL.json')
 
 describe('Shorten:UI', () => {
   beforeEach(async () => {
-    await jestPuppeteer.resetPage()
+    // await jestPuppeteer.resetPage()
     await page.goto('http://localhost:4444/shorten')
   })
 
@@ -40,7 +40,37 @@ describe('Shorten:UI', () => {
     await page.keyboard.press('Enter')
   })
 
-  xit('should require url to be submitted', async () => {
+  xit('should direct to correct URL when clicking on link', async (done) => {
+    await page.setRequestInterception(true)
+    page.on('request', async req => {
+      if (req.url().includes('https://rel.ink/api/links')) {
+        await req.respond({
+          headers: {'Access-Control-Allow-Origin': '*'},
+          body: JSON.stringify(validURL),
+          contentType: 'application/json'
+        })
+      }
+    })
+
+    page.on('response', async res => {
+      if (res.url().includes('https://rel.ink/api/links/')) {
+        await page.setRequestInterception(false)
+        await page.click('#shorten-link')
+        await page.waitFor(10000)
+        await screenshot('validURL.png')
+        done()
+      }
+    })
+
+    await page.type('input[name="url"]', 'https://www.apple.com')
+    await page.keyboard.press('Enter')
+  }, 30000)
+
+  it.only('should require valid url format to be submitted', async () => {
+    await page.type('input[name="url"]', 'invalidurl')
+    await page.keyboard.press('Enter')
+    let result = await page.$eval('#main', el => el.innerText)
+    expect(result).toBe('invalid url')
   })
 
   xit('should display error if invalid URL ', async () => {

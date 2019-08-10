@@ -1,6 +1,6 @@
 let express = require('express')
 let router = express.Router()
-let validateForm = require('../validation')
+let validateForm = require('../validation/validateForm')
 
 router.get('/', (req, res, next) => {
   res.render('form')

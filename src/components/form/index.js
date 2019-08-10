@@ -1,4 +1,4 @@
-let validateForm = require('../../validation')
+let validateForm = require('../../validation/validateForm')
 
 let $form = document.querySelector('form[name="myForm"]')
 let $flashSuccess = document.querySelector('#flash-success')

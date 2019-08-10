@@ -1,4 +1,4 @@
-let validateForm = require('../index')
+let validateForm = require('../validateForm')
 
 describe('validateForm', () => {
   it('should return true if valid payload', () => {

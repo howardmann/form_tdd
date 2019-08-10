@@ -17,7 +17,7 @@ $form.addEventListener('submit', e => {
     .then(async data => {
       let result = await data.json()
       let hashid = result.hashid
-      let html = `<a href="https://rel.ink/${hashid}">https://rel.ink/${hashid}</a>`
+      let html = `<a id="shorten-link" href="https://rel.ink/${hashid}">https://rel.ink/${hashid}</a>`
       $main.innerHTML = html
     })
 })
