@@ -28,7 +28,7 @@ describe('Shorten:UI', () => {
       if (res.url().includes('https://rel.ink/api/links/')) {
         let results = await res.json()
         let message = await page.$eval('#main', el => el.innerText)
-        expect(message).toBe(`https://rel.ink/api/links/${results.hashid}`)
+        expect(message).toBe(`https://rel.ink/${results.hashid}`)
         await screenshot('success.png')
         await page.setRequestInterception(false)
         done()
