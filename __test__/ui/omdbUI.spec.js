@@ -121,4 +121,44 @@ describe('OMDB:UI', () => {
 
   })
 
+  it('should clear error messages on success', async (done) => {
+    await page.setRequestInterception(true)
+    // register event listener to intercept fetch response after request is made
+    page.on('request', async req => {
+      await req.respond({headers: {'Access-Control-Allow-Origin': '*'},
+        body: JSON.stringify(notFound),
+        contentType: 'application/json'
+      })
+    })
+
+    // Check for error response
+    page.on('response', async (res) => {
+      // only listen for specific response. E.g. ignore browser default favicon.ico requests
+      if (res.url().includes('omdbapi.com')) {
+        let message = await page.$eval('#main', el => el.innerText)
+        expect(message).toBe('No Results')
+        let errorMsg = await page.$eval('#flash-error', el => el.innerText)
+        expect(errorMsg).toBe("")
+
+        await page.setRequestInterception(false)
+        await screenshot('clearError')
+        done()
+      }
+    })
+
+    await expect(page).toFillForm('form[name="movieForm"]', {
+      search: 'ab',
+    })
+    await page.keyboard.press('Enter')
+    let errorMsg = await page.$eval('#flash-error', el => el.innerText)
+    expect(errorMsg).toMatch(/min 3 characters/)
+
+    await expect(page).toFillForm('form[name="movieForm"]', {
+      search: 'star wars'
+    })
+    await page.keyboard.press('Enter')
+
+  })
+
+
 })

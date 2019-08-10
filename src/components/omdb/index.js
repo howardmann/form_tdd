@@ -17,6 +17,7 @@ $movieForm.addEventListener('submit', (e) => {
   $main.innerText = '...searching'
   fetch(`http://www.omdbapi.com/?s=${search}&apikey=ee0200e`)
     .then(async res => {
+      $flashError.innerText = ''
       let data = await res.json()
       let response = data.Response
       let result;
