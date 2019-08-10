@@ -1,5 +1,6 @@
 describe('Form:UI', () => {
   beforeEach(async () => {
+    await jestPuppeteer.resetPage()
     await page.goto('http://localhost:4444')
   })
 
@@ -94,7 +95,7 @@ describe('Form:UI', () => {
       password: '12345678910'
     })
     await page.keyboard.press('Enter')
-    await page.waitForNavigation()
+
     let errorMsg = await page.$eval('#flash-error', el => el.innerText)
     let errorBackgroundColor = await page.$eval('#flash-error', el => el.style.backgroundColor)
     expect(errorMsg).toMatch(/company name required/)

@@ -1,6 +1,6 @@
 // fixtures
-let dummyPosters = require('../fixtures/posters.json')
-let notFound = require('../fixtures/notFound.json')
+let dummyPosters = require('../fixtures/omdb/posters.json')
+let notFound = require('../fixtures/omdb/notFound.json')
 
 // helper fn to take screenshots
 let screenshot = async (filename) => {
