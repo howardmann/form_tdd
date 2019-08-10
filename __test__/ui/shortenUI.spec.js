@@ -66,11 +66,12 @@ describe('Shorten:UI', () => {
     await page.keyboard.press('Enter')
   }, 30000)
 
-  it.only('should require valid url format to be submitted', async () => {
-    await page.type('input[name="url"]', 'invalidurl')
+  it('should require valid url format to be submitted', async () => {
+    await page.type('input[name="url"]', 'apple.com')
     await page.keyboard.press('Enter')
     let result = await page.$eval('#main', el => el.innerText)
     expect(result).toBe('invalid url')
+    await screenshot('invalidFormat.png')
   })
 
   xit('should display error if invalid URL ', async () => {
