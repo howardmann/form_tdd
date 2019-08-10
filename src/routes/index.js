@@ -31,4 +31,8 @@ router.get('/omdb', (req, res, next) => {
   res.render('omdb')
 })
 
+router.get('/shorten', (req, res, next) => {
+  res.render('shorten')
+})
+
 module.exports = router
