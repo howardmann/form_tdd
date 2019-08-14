@@ -13,6 +13,7 @@
 module.exports = {
   entry: {
     form: './src/components/form/index.js',
+    omdbReact: './src/components/omdbReact/index.js',
     counter: './src/components/counter/index.js',
     omdb: './src/components/omdb/index.js',
     shorten: './src/components/shorten/index.js'
@@ -20,5 +21,14 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: __dirname + '/src/public/js'
+  },
+  module: {
+    rules: [{
+     test: /\.js$/,
+       exclude: /(node_modules)/,
+       use: {
+         loader: 'babel-loader'
+       }
+    }]
   }
 };
